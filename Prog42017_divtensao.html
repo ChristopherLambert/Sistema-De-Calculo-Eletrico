@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Prog 4 2017</title>
+
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- custom css (blue color by default) -->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
+	<style>
+	.form-control{
+		width:90%;
+	}
+	
+	.field_set{
+		border-color:#F00;
+	}
+
+	.divHidden{
+	   display:none;
+	}
+	</style>
+    </head>
+    <body>
+	  <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+		     <li ><a href="Prog42017_LeiDeOhm.html">Lei de Ohm</i></a></li>
+             <li ><a href="Prog42017_Associação.html">Associação de Resistores</i></a></li>  
+			  <li ><a href="Prog42017_divtensao.html">Divisor de Tensão</i></a></li>  
+			  <li ><a href="Prog42017_PotenciaDissipada.html">Potencia Dissipada</i></a></li>  
+          </ul>
+       </div>
+        <div class="breadcrumb-wrap">		
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Divisor de Tensão</h4>
+                    </div>
+                </div>
+            </div>
+        </div><!--breadcrumbs-->
+		
+        <div class="divide80"></div>
+		
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+					<img id="imgdiv" src="img/divtensao.png" alt="Smiley face" usemap="#imglei">
+						<div class="form-control">
+							<label for="r1">R1= </label> 
+							<input id="r1" type="number" placeholder="0" min="0">
+							<label id="v1"> <label>
+						</div>
+						<div class="form-control">
+							<label for="r2">R2= </label> 
+							<input id="r2" type="number" placeholder="0" min="0">
+							<label id="v2"> <label>
+						</div>
+						<div class="form-control">
+							<label for="vin">VIN= </label> 
+							<input id="vin" type="number" placeholder="0" min="0">
+							<label id="vout"> <label>
+						</div>
+					<input id="calcular" type="button" value="Calcular">
+					<input id="clear" type="button" value="Limpar">
+                </div>
+            </div>
+        </div>
+		
+        <div class="divide80"></div>
+		
+         <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 margin30">
+                        <div class="footer-col">
+                            <h3>Prog 4 2017</h3>
+                        </div>                        
+                    </div><!--footer col-->
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-btm">
+                            <span>&copy;2017. Theme by Christopher & Renan </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		
+       <!--scripts-->
+        <script src="js/jquery.min.js"></script>        
+        <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>       
+        
+		<script>
+		  $("#calcular").click(function() {
+		    var R1 = $("#r1").val() == null ? 0 : Number($("#r1").val());
+			var R2 = $("#r2").val() == null ? 0 : Number($("#r2").val());
+			var vin = $("#vin").val() == null ? 0 : Number($("#vin").val());
+			
+			var v1 = (vin * R1) / (R1 + R2);
+			var v2 = (vin * R2) / (R1 + R2);
+			var vout = v1 + v2;
+			var req = R1 + R2;
+			var i = vout / req;
+			
+			vout = vout.toFixed(3);
+			i = i.toFixed(3);
+			
+			 $('#v1').html('V1=' + v1);
+			 $('#v2').html('V2=' + v2);
+			 $('#vout').html('VOUT=' + vout + "    I=" + i + "    REQ=" + req);
+
+		  });
+		  
+		  $("#clear").click(function() {
+			$('#v1').html('');
+			$('#v2').html('');
+			$('#vout').html('');
+		  });
+		</script>
+    </body>
+</html>
