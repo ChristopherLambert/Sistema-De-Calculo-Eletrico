@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Prog 4 2017</title>
+
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- custom css (blue color by default) -->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
+	<style>
+	.form-control{
+		width:100%;
+	}
+	
+	.field_set{
+		border-color:#F00;
+	}
+
+	.divHidden{
+	   display:none;
+	}
+	</style>
+      
+    
+    </head>
+    <body>
+	  <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+		    <li ><a href="Prog42017_LeiDeOhm.html">Lei de Ohm</i></a></li>
+        <li ><a href="Prog42017_Associação.html">Associação de Resistores</i></a></li>  
+			  <li ><a href="Prog42017_divtensao.html">Divisor de Tensão</i></a></li>  
+			  <li ><a href="Prog42017_PotenciaDissipada.html">Potencia Dissipada</i></a></li>  
+        <li ><a href="Prog42017_Transistor.html">Transistor</i></a></li>
+      </ul>
+    </div>
+        <div class="breadcrumb-wrap">		
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Transistor</h4>
+                    </div>
+                </div>
+            </div>
+        </div><!--breadcrumbs-->
+		
+        <div class="divide80"></div>
+		
+        <div class="container">
+
+           <div class="form-control">
+             <label for="pc">Potencia de Carga(PC)= </label> 
+             <input id="pc" type="number" placeholder="0" min="0">
+             <label for="tvolt">Tensão(T)= </label> 
+             <input id="tvolt" type="number" placeholder="0" min="0">
+             <label for="tb">Tensão Base(Tb)= </label> 
+             <input id="tb" type="number" placeholder="0" min="0">
+             <label for="ganho">Ganho(G)= </label> 
+             <input id="ganho" type="number" placeholder="0" min="0">
+            </div>
+            <div id="div1" class="form-control ">
+               <label id="resp"> <label>
+            </div>
+           <input id="calcular" type="button" value="Calcular">
+           <input id="limpar" type="button" value="Limpar">
+           <img id="imglei" src="img/transistor.png" alt="Smiley face">
+
+        </div>
+		
+        <div class="divide80"></div>
+		
+       <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 margin30">
+                        <div class="footer-col">
+                            <h3>Prog 4 2017</h3>
+                        </div>                        
+                    </div><!--footer col-->
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-btm">
+                            <span>&copy;2017. Theme by Christopher & Renan </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		
+         
+	   <script src="js/jquery.min.js" type="text/javascript"></script> 
+    </body>
+
+    <script>
+       
+    $("#calcular").click(function() {
+
+        var P = $("#pc").val() == null ? 0 : Number($("#pc").val());
+        var Tv = $("#tvolt").val() == null ? 0 : Number($("#tvolt").val());
+        var Tb = $("#tb").val() == null ? 0 : Number($("#tb").val());
+        var G = $("#ganho").val() == null ? 0 : Number($("#ganho").val());
+        
+        Tb = Tb - 0.6;
+        var ic = P/Tv;
+        var ib = ic/G;
+        var R1 = Tb/ib;
+
+        $('#resp').html("Ic=PC/T= " + ic + "         Ib=Ic/G= " + ib + "           R=Tb/Ib= " + R1);
+        
+          
+      });
+
+     $("#limpar").click(function() {
+       $('#resp').html("");
+        $("#pc").val("");
+        $("#tvolt").val("");
+        $("#tb").val("");
+        $("#ganho").val("");
+     });
+    </script>
+</html>
