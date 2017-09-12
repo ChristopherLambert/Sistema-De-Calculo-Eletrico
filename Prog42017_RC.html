@@ -53,6 +53,11 @@
 
             <form style="margin-left:10%;">
                 <fieldset class="field_set">
+                    <input id="q1" type="radio" name="tdd" value="1" checked>Carga
+                    <input id="q2" type="radio" name="tdd" value="2" checked>Descarga
+                    <br/>
+                    <label for="vlbl"">E= </label> 
+                    <input id="vlbl" type="number" placeholder="0" min="0" style="margin-left:3%;"> <br/>
                     <label for="rlbl">Resistência(R)= </label> 
                     <input id="rlbl" type="number" placeholder="0" min="0" style="margin-left:3%;">
                     <label for="clbl">Capacitancia(C)= </label> 
@@ -121,15 +126,39 @@
         $("#divresp").hide();
         $("#rlbl").val(0);
         $("#clbl").val(0);
+        $("#vlbl").val(0);
 
      });
 
     $("#calcular").click(function() {
          
+        var vo = $("#vlbl").val() == null ? 0 : Number($("#vlbl").val());
+        var c = $("#rlbl").val() == null ? 0 : Number($("#clbl").val());
+        var r = $("#rlbl").val() == null ? 0 : Number($("#rlbl").val());
+        var T = c * r;
+         if ($('#q1').is(':checked')){
+           var T0 = 0;
+           var T1 = vo * 0.63;
+           var T2 = vo * 0.86;
+           var T3 = vo * 0.95;
+           var T4 = vo * 0.98;
+           var T5 = vo * 0.99;
+         }else{
+           var T0 = vo;
+           var T1 = vo * 0.37;
+           var T2 = vo * 0.14;
+           var T3 = vo * 0.05;
+           var T4 = vo * 0.018;
+           var T5 = vo * 0.007;
+
+           T4 = T4.toFixed(3);
+           T5 = T5.toFixed(3);
+         }
+
         var salesChart = new FusionCharts({
-             type: 'area2d',
+            type: 'area2d',
             renderAt: 'chartRender',
-            width: '600',
+            width: '500',
             height: '300',
             dataFormat: 'json',
             dataSource: {
@@ -146,37 +175,34 @@
                 },            
                 "data": [
                     {
-                        "label": "Mon",
-                        "value": "4123"
+                        "label": "T0",
+                        "value": T0
                     }, 
                     {
-                        "label": "Tue",
-                        "value": "4633"
+                        "label": "T1",
+                        "value": T1
                     }, 
                     {
-                        "label": "Wed",
-                        "value": "5507"
+                        "label": "T2",
+                        "value": T2
                     }, 
                     {
-                        "label": "Thu",
-                        "value": "4910"
+                        "label": "T3",
+                        "value": T3
                     }, 
                     {
-                        "label": "Fri",
-                        "value": "5529"
+                        "label": "T4",
+                        "value": T4
                     }, 
                     {
-                        "label": "Sat",
-                        "value": "5803"
-                    }, 
-                    {
-                        "label": "Sun",
-                        "value": "6202"
+                        "label": "T5",
+                        "value": T5
                     }
             ]
         }
         }).render();
 
+        $("#resp").html("Tempo Total= R*C=" + T);
         $("#divresp").show();
         $("#chartRender").show();
     });
