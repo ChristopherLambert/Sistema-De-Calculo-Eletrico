@@ -132,9 +132,9 @@
 
     $("#calcular").click(function() {
          
-        var vo = $("#vlbl").val() == null ? 0 : Number($("#vlbl").val());
-        var c = $("#rlbl").val() == null ? 0 : Number($("#clbl").val());
-        var r = $("#rlbl").val() == null ? 0 : Number($("#rlbl").val());
+        var vo = $("#vlbl").val() == null ? 0 : Number($("#vlbl").val().replace(",", "."));
+        var c = $("#rlbl").val() == null ? 0 : Number($("#clbl").val().replace(",", "."));
+        var r = $("#rlbl").val() == null ? 0 : Number($("#rlbl").val().replace(",", "."));
         var T = c * r;
          if ($('#q1').is(':checked')){
            var T0 = 0;
