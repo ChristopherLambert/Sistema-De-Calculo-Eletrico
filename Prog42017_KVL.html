@@ -43,7 +43,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h4>Transistor</h4>
+                        <h4>KVL</h4>
                     </div>
                 </div>
             </div>
@@ -51,27 +51,37 @@
 		
         <div class="divide80"></div>
 		
-        <div class="container">
+        <div class="container row">
 
-           <div class="form-control">
-             <label for="pc">Potencia de Carga(PC)= </label> 
-             <input id="pc" type="number" placeholder="0" min="0">
-             <label for="tvolt">Tensão(T)= </label> 
-             <input id="tvolt" type="number" placeholder="0" min="0">
-             <label for="tb">Tensão Base(Tb)= </label> 
-             <input id="tb" type="number" placeholder="0" min="0">
-             <label for="ganho">Ganho(G)= </label> 
-             <input id="ganho" type="number" placeholder="0" min="0">
-            </div>
-            <div id="div1" class="form-control ">
-               <label id="resp"> <label>
-            </div>
-           <input id="calcular" type="button" value="Calcular">
-           <input id="limpar" type="button" value="Limpar">
-           <img id="imglei" src="img/transistor.png" alt="Smiley face">
-
+        <div class="col-md-4" style="margin-left:25%;">
+            <form>
+                <fieldset class="field_set">
+                    <label for="R1"">R1= </label> 
+                    <input id="R1" type="number" placeholder="0" min="0" style="margin-left:3%;"> <br/>
+                    <label for="R2">R2= </label> 
+                    <input id="R2" type="number" placeholder="0" min="0"  style="margin-left:3%;">
+                    <br/> 
+                    <label for="R3">R3= </label> 
+                    <input id="R3" type="number" placeholder="0" min="0" style="margin-left:3%;""> 
+                    <br/> 
+                    <label for="R4">R4= </label> 
+                    <input id="R4" type="number" placeholder="0" min="0" style="margin-left:3%;""> 
+                      <br/> 
+                    <div id="divresp" class="form-control ">
+                        <label id="resp"> <label>
+                    </div>
+                    <input id="calcular" type="button" value="Calcular">
+                    <input id="limpar" type="button" value="Limpar" style="margin-left:5%;">
+                </fieldset>
+            </form>
+          </div>
+      
+        <div class="col-md-4">
+            <img id="imgrc" src="img/KVL.png" alt="RC">
         </div>
-		
+
+		  </div>
+
         <div class="divide80"></div>
 		
        <footer id="footer">
@@ -99,30 +109,29 @@
     </body>
 
     <script>
-       
+    $("#divresp").hide();
     $("#calcular").click(function() {
 
-        var P = $("#pc").val() == null ? 0 : Number($("#pc").val());
-        var Tv = $("#tvolt").val() == null ? 0 : Number($("#tvolt").val());
-        var Tb = $("#tb").val() == null ? 0 : Number($("#tb").val());
-        var G = $("#ganho").val() == null ? 0 : Number($("#ganho").val());
+        var R1 = $("#R1").val() == null ? 0 : Number($("#R1").val().replace(",", "."));
+        var R2 = $("#R2").val() == null ? 0 : Number($("#R2").val().replace(",", "."));
+        var R3 = $("#R3").val() == null ? 0 : Number($("#R3").val().replace(",", "."));
+        var R4 = $("#R4").val() == null ? 0 : Number($("#R4").val().replace(",", "."));
         
-        Tb = Tb - 0.6;
-        var ic = P/Tv;
-        var ib = ic/G;
-        var R1 = Tb/ib;
+        var I3 = 24/R4;
+        var VS2 = R3*I3 + R4*I3;
 
-        $('#resp').html("Ic=PC/T= " + ic + "         Ib=Ic/G= " + ib + "           R=Tb/Ib= " + R1);
-        
+        $("#divresp").show();
+        $('#resp').html("I3= 24/R4=" + I3  + "A    VS2=R3*I3 + R4*I3=" + VS2 + "V");
           
       });
 
      $("#limpar").click(function() {
+       $("#divresp").hide();
        $('#resp').html("");
-        $("#pc").val("");
-        $("#tvolt").val("");
-        $("#tb").val("");
-        $("#ganho").val("");
+       $("#R1").val("");
+       $("#R2").val("");
+       $("#R3").val("");
+       $("#R4").val("");
      });
     </script>
 </html>
