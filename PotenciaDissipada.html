@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>>Sistema de Cáluclo</title>
+
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- custom css (blue color by default) -->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
+	<style>
+	.form-control{
+		width:100%;
+	}
+	
+	.field_set{
+		border-color:#F00;
+	}
+
+	.divHidden{
+	   display:none;
+	}
+	</style>
+    </head>
+    <body>
+	<div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <li ><a href="LeiDeOhm.html">Lei de Ohm</i></a></li>
+        <li ><a href="KVL.html">KVL</i></a></li>
+        <li ><a href="Associação.html">Associação de Resistores</i></a></li>  
+        <li ><a href="Divtensao.html">Divisor de Tensão</i></a></li>  
+        <li ><a href="PotenciaDissipada.html">Potencia Dissipada</i></a></li>  
+        <li ><a href="Transistor.html">Transistor</i></a></li>
+        <li ><a href="RC.html">RC</i></a></li>
+      </ul>
+       </div>
+        <div class="breadcrumb-wrap">		
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Potencia Dissipada</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+        <div class="divide80"></div>
+		
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+					<img id="imgdiv" src="img/serie.png" >
+                    <form role="form">
+                        <fieldset>
+                            <legend>Associação de Resistores</legend>
+                            <div id="divQtd" class="form-control">
+                                <label for="q1">Quantidade </label> 
+                                <input id="q1" type="radio" name="r3radio" value="1" checked>1
+                                <input id="q2" type="radio" name="r3radio" value="2" checked>2
+                                <input id="q3" type="radio" name="r3radio" value="3">3
+                                <input id="q4" type="radio" name="r3radio" value="4">4
+                            </div>
+                            
+                            <div class="form-control">
+                            <label for="r1">R1= </label> 
+                            <input id="r1" type="number" placeholder="0" min="0">
+                            <label for="p1">Pnominal1= </label> 
+                            <input id="p1" type="number" placeholder="0" min="0">
+                            </div>
+
+                            <div id="divr1" class="form-control divHidden">
+                                <label id="pd1"> <label>
+                            </div>
+ 
+                            <div class="form-control">
+                            <label for="r2">R2= </label> 
+                            <input id="r2" type="number"  placeholder="0" min="0">
+                            <label for="p2">Pnominal2= </label> 
+                            <input id="p2" type="number" placeholder="0" min="0">
+                            </div>
+
+                            <div  id="divr2" class="form-control divHidden">
+                                <label id="pd2"> <label>
+                            </div>
+                    
+                            <div class="form-control">
+                            <label for="r3">R3= </label> 
+                            <input  id="r3" type="number"  placeholder="0" min="0">
+                            <label for="p3">Pnominal3= </label> 
+                            <input id="p3" type="number" placeholder="0" min="0">
+                            </div>
+
+                             <div id="divr3" class="form-control divHidden">
+                                <label id="pd3"> <label>
+                            </div>
+ 
+                            <div class="form-control">
+                            <label for="r4">R4= </label> 
+                            <input id="r4" type="number" placeholder="0" min="0">
+                            <label for="p4">Pnominal4= </label> 
+                            <input id="p4" type="number" placeholder="0" min="0">
+                            </div>
+
+                            <div id="divr4" class="form-control divHidden">
+                                <label id="pd4"> <label>
+                            </div>
+                            
+                            <div class="form-control">
+                            <label for="corrente">Corrente= </label> 
+                            <input id="corrente" type="number" placeholder="0">
+                            </div>
+                    
+                            <input id="calcular" type="button" value="Calcular">
+                            <input id="limpar" type="button" value="Limpar">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+		
+        <div class="divide80"></div>
+		
+         <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 margin30">
+                       <div class="footer-col">
+                            <h3>Sistema de Cáluclo Para Circuitos Eletricos</h3>
+                        </div>                  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                         <div class="footer-btm">
+                            <span>&copy;2017. Developed By Christopher </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		
+        <script src="js/jquery.min.js"></script>        
+        <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>       
+        
+		<script>
+        var qtd = 2;
+
+        $('input[type=radio][name=r3radio]').change(function() {
+            if (this.value == '1') {
+                qtd =1;
+            }else if (this.value == '2') {
+                qtd =2;
+            }else if (this.value == '3') {
+                qtd =3;
+            }else if (this.value == '4') {
+                qtd =4;
+            }
+        });
+
+        $("#limpar").click(function() {
+             $("#divr1").addClass("divHidden");
+             $("#divr2").addClass("divHidden");
+             $("#divr3").addClass("divHidden");
+             $("#divr4").addClass("divHidden");
+
+             $("#r1").val("");
+             $("#r2").val("");
+             $("#r3").val("");
+             $("#r4").val("");
+             $("#p5").val("");
+             $("#p6").val("");
+             $("#p7").val("");
+             $("#p8").val("");
+             $("#corrente").val("");
+        });
+
+		$("#calcular").click(function() {
+
+            var R1 = $("#r1").val() == null ? 0 : Number($("#r1").val().replace(",", "."));
+            var R2 = $("#r2").val() == null ? 0 : Number($("#r2").val().replace(",", "."));
+            var R3 = $("#r3").val() == null ? 0 : Number($("#r3").val().replace(",", "."));
+            var R4 = $("#r4").val() == null ? 0 : Number($("#r4").val().replace(",", "."));
+            var P1 = $("#p1").val() == null ? 0 : Number($("#p1").val().replace(",", "."));
+            var P2 = $("#p2").val() == null ? 0 : Number($("#p2").val().replace(",", "."));
+            var P3 = $("#p3").val() == null ? 0 : Number($("#p3").val().replace(",", "."));
+            var P4 = $("#p4").val() == null ? 0 : Number($("#p4").val().replace(",", "."));
+            var CO = $("#corrente").val() == null ? 0 : Number($("#corrente").val().replace(",", "."));
+            CO = CO * CO;
+
+            //RESPOSTAS
+            var Pd1,Pd2,Pd3,Pd4;
+
+            if (qtd == 1) {
+
+              $("#divr1").removeClass("divHidden");
+              Pd1 = R1 * CO;
+
+              if(Pd1 > P1){
+                $('#pd1').css("color","red");
+                $('#pd1').html("Resistor 1 Queimado Potencia Dissipada= " + Pd1);
+              }else{
+                $('#pd1').css("color","black");
+                $('#pd1').html("Resistor 1 Bem Dimensionado Potencia Dissipada= " + Pd1);
+              }
+
+            }else if(qtd == 2){
+
+              $("#divr1").removeClass("divHidden");
+              $("#divr2").removeClass("divHidden");
+              Pd1 = R1 * CO;
+              Pd2 = R2 * CO;
+
+              if(Pd1 > P1){
+                 $('#pd1').css("color","red");
+                $('#pd1').html("Resistor 1 Queimado Potencia Dissipada= " + Pd1 + "W");
+              }else{
+                $('#pd1').css("color","black");
+                $('#pd1').html("Resistor 1 Bem Dimensionado Potencia Dissipada= " + Pd1 + "W");
+              }
+
+             if(Pd2 > P2){
+                 $('#pd2').css("color","red");
+                $('#pd2').html("Resistor 2 Queimado Potencia Dissipada= " + Pd2 + "W");
+              }else{
+                $('#pd2').css("color","black");
+                $('#pd2').html("Resistor 2 Bem Dimensionado Potencia Dissipada= " + Pd2 + "W");
+              }
+
+
+            }else if(qtd == 3){
+
+              $("#divr1").removeClass("divHidden");
+              $("#divr2").removeClass("divHidden");
+              $("#divr3").removeClass("divHidden");
+              Pd1 = R1 * CO;
+              Pd2 = R2 * CO;
+              Pd3 = R3 * CO;
+
+              if(Pd1 > P1){
+                $('#pd1').css("color","red");
+                $('#pd1').html("Resistor 1 Queimado Potencia Dissipada= " + Pd1 + "W");
+              }else{
+                $('#pd1').css("color","black");
+                $('#pd1').html("Resistor 1 Bem Dimensionado Potencia Dissipada= " + Pd1 + "W");
+              }
+
+             if(Pd2 > P2){
+                 $('#pd2').css("color","red");
+                $('#pd2').html("Resistor 2 Queimado Potencia Dissipada= " + Pd2 + "W");
+              }else{
+                $('#pd2').css("color","black");
+                $('#pd2').html("Resistor 2 Bem Dimensionado Potencia Dissipada= " + Pd2 + "W");
+              }
+
+             if(Pd3 > P3){
+                 $('#pd3').css("color","red");
+                $('#pd3').html("Resistor 3 Queimado Potencia Dissipada= " + Pd3 + "W");
+              }else{
+                $('#pd3').css("color","black");
+                $('#pd3').html("Resistor 3 Bem Dimensionado Potencia Dissipada= " + Pd3 + "W");
+              }
+
+
+            }else if(qtd == 4){
+
+              $("#divr1").removeClass("divHidden");
+              $("#divr2").removeClass("divHidden");
+              $("#divr3").removeClass("divHidden");
+              $("#divr4").removeClass("divHidden");
+              Pd1 = R1 * CO;
+              Pd2 = R2 * CO;
+              Pd3 = R3 * CO;
+              Pd4 = R4 * CO;
+
+              if(Pd1 > P1){
+                 $('#pd1').css("color","red");
+                $('#pd1').html("Resistor 1 Queimado Potencia Dissipada= " + Pd1 + "W");
+              }else{
+                $('#pd1').css("color","black");
+                $('#pd1').html("Resistor 1 Bem Dimensionado Potencia Dissipada= " + Pd1 + "W");
+              }
+
+             if(Pd2 > P2){
+                 $('#pd2').css("color","red");
+                $('#pd2').html("Resistor 2 Queimado Potencia Dissipada= " + Pd2 + "W");
+              }else{
+                $('#pd2').css("color","black");
+                $('#pd2').html("Resistor 2 Bem Dimensionado Potencia Dissipada= " + Pd2 + "W");
+              }
+
+             if(Pd3 > P3){
+                 $('#pd3').css("color","red");
+                $('#pd3').html("Resistor 3 Queimado Potencia Dissipada= " + Pd3 + "W");
+              }else{
+                $('#pd3').css("color","black");
+                $('#pd3').html("Resistor 3 Bem Dimensionado Potencia Dissipada= " + Pd3 + "W");
+              }
+
+             if(Pd4 > P4){
+                 $('#pd4').css("color","red");
+                $('#pd4').html("Resistor 4 Queimado Potencia Dissipada= " + Pd4 + "W");
+              }else{
+                $('#pd4').css("color","black");
+                $('#pd4').html("Resistor 4 Bem Dimensionado Potencia Dissipada= " + Pd4 + "W");
+              }
+            }
+		  });
+		</script>
+    </body>
+</html>

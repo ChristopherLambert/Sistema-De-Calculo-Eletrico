@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>>Sistema de Cáluclo</title>
+
+        <!-- Bootstrap -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- custom css (blue color by default) -->
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
+	<style>
+	.form-control{
+		width:100%;
+	}
+	
+	.field_set{
+		border-color:#F00;
+	}
+
+	.divHidden{
+	   display:none;
+	}
+	</style>
+      
+    
+    </head>
+    <body>
+	 <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+        <li ><a href="LeiDeOhm.html">Lei de Ohm</i></a></li>
+        <li ><a href="KVL.html">KVL</i></a></li>
+        <li ><a href="Associação.html">Associação de Resistores</i></a></li>  
+        <li ><a href="Divtensao.html">Divisor de Tensão</i></a></li>  
+        <li ><a href="PotenciaDissipada.html">Potencia Dissipada</i></a></li>  
+        <li ><a href="Transistor.html">Transistor</i></a></li>
+        <li ><a href="RC.html">RC</i></a></li>
+      </ul>
+       </div>
+        <div class="breadcrumb-wrap">		
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Transistor</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+        <div class="divide80"></div>
+		
+        <div class="container">
+
+           <div class="form-control">
+             <label for="pc">Potencia de Carga(PC)= </label> 
+             <input id="pc" type="number" placeholder="0" min="0">
+             <label for="tvolt">Tensão(T)= </label> 
+             <input id="tvolt" type="number" placeholder="0" min="0">
+             <label for="tb">Tensão Base(Tb)= </label> 
+             <input id="tb" type="number" placeholder="0" min="0">
+             <label for="ganho">Ganho(G)= </label> 
+             <input id="ganho" type="number" placeholder="0" min="0">
+            </div>
+            <div id="div1" class="form-control ">
+               <label id="resp"> <label>
+            </div>
+           <input id="calcular" type="button" value="Calcular">
+           <input id="limpar" type="button" value="Limpar">
+           <img id="imglei" src="img/transistor.png" alt="Smiley face">
+
+        </div>
+		
+        <div class="divide80"></div>
+		
+       <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 margin30">
+                        <div class="footer-col">
+                            <h3>Sistema de Cáluclo Para Circuitos Eletricos</h3>
+                        </div>                         
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="footer-btm">
+                            <span>&copy;2017. Developed By Christopher </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		
+         
+	   <script src="js/jquery.min.js" type="text/javascript"></script> 
+     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
+    </body>
+
+    <script>
+       
+    $("#calcular").click(function() {
+
+        var P = $("#pc").val() == null ? 0 : Number($("#pc").val().replace(",", "."));
+        var Tv = $("#tvolt").val() == null ? 0 : Number($("#tvolt").val().replace(",", "."));
+        var Tb = $("#tb").val() == null ? 0 : Number($("#tb").val().replace(",", "."));
+        var G = $("#ganho").val() == null ? 0 : Number($("#ganho").val().replace(",", "."));
+        
+        Tb = Tb - 0.6;
+        var ic = P/Tv;
+        var ib = ic/G;
+        var R1 = Tb/ib
+
+        $('#resp').html("Ic=PC/T= " + ic + "         Ib=Ic/G= " + ib + "           R=Tb/Ib= " + R1);
+ 
+      });
+
+     $("#limpar").click(function() {
+       $('#resp').html("");
+        $("#pc").val("");
+        $("#tvolt").val("");
+        $("#tb").val("");
+        $("#ganho").val("");
+     });
+    </script>
+</html>
