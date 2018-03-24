@@ -6,3 +6,5 @@ entre outors  que podem ajudar a um aluno de eletricidade, fisica e afins , nos 
 #Graficos de Tempo de Carga e Descarga do Capacitor 
 
 Usando FusionCharts  
+
+![alt text](https://github.com/ChristopherLambert/Sistema-De-Calculo-Eletrico/blob/master/img/PrintRC.png)
